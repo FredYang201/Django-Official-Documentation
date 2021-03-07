@@ -4,11 +4,18 @@ from django.template import loader
 from django.urls import reverse
 from django.views import generic
 from django.utils import timezone
+import datetime
 
 from .models import Question, Choice
 
 
 # Create your views here.
+def get_current_time(request):
+    now = datetime.datetime.now()
+    html = "<html><body>It is now {}.</body></html>".format(now)
+    return HttpResponse(html)
+
+
 def index(request, age=32, year=2021):
     lastest_question_list = Question.objects.order_by('-pubDate')[:5]
     # output = ', '.join([each.questionText for each in lastest_question_list])
